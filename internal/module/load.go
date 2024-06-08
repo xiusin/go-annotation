@@ -42,7 +42,7 @@ func init() {
 func (l cacheableLoader[T]) load(path string) (T, error) {
 	t, ok := l.cache[path]
 	if ok {
-		log.Println("hit cache %s", path)
+		log.Printf("hit cache %s\n", path)
 		return t, nil
 	}
 
@@ -84,7 +84,7 @@ func loadModule(path string) (module, error) {
 			}
 			subModFile, err := modFileLoader.load(filePath)
 			if err != nil {
-				log.Fatal("unable to load submodule %s: %s", filePath, err)
+				log.Fatalf("unable to load submodule %s: %s", filePath, err)
 				return nil
 			}
 			subModFiles[filePath] = moduleName(subModFile)
@@ -97,13 +97,12 @@ func loadModule(path string) (module, error) {
 	}
 
 	if len(modFilePath) == 0 {
-		log.Println("loading module %s with no mod file", path)
 		return newModule(path, nil, goFiles, subModFiles), nil
 	}
 
 	modeFile, err := modFileLoader.load(modFilePath)
 	if err != nil {
-		log.Fatal("unable to preload base mod file %s: %s", modFilePath, err)
+		log.Fatalf("unable to preload base mod file %s: %s", modFilePath, err)
 		return newModule(path, nil, goFiles, subModFiles), nil
 	}
 

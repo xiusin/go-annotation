@@ -48,7 +48,6 @@ func initEnv() {
 	}
 
 	if len(enironment.GoRoot) > 0 {
-		log.Println("env is preloaded %v", enironment)
 		return
 	}
 
