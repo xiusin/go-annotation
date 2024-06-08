@@ -28,7 +28,7 @@ func initArgs() {
 	args := make([]string, len(os.Args))
 	copy(args, os.Args)
 	if len(os.Args) < 2 {
-		args[1] = "."
+		args = append(args, ".")
 	}
 
 	enironment.ProjectRoot = args[1]
